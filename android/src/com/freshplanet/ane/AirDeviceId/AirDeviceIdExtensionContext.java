@@ -27,7 +27,6 @@ import android.util.Log;
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.freshplanet.ane.AirDeviceId.functions.IsSupportedFunction;
-import com.freshplanet.ane.AirDeviceId.functions.getIDFAFunction;
 import com.freshplanet.ane.AirDeviceId.functions.getIDFVFunction;
 import com.freshplanet.ane.AirDeviceId.functions.getIDFunction;
 
@@ -59,7 +58,6 @@ public class AirDeviceIdExtensionContext extends FREContext
 		functionMap.put("isSupported", new IsSupportedFunction());
 		functionMap.put("getID", new getIDFunction());
 		functionMap.put("getIDFV", new getIDFVFunction());
-		functionMap.put("getIDFA", new getIDFAFunction());
 		
 		return functionMap;	
 	}

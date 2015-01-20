@@ -219,25 +219,6 @@ DEFINE_ANE_FUNCTION(getIDFV) {
     return fo;
 }
 
-DEFINE_ANE_FUNCTION(getIDFA) {
-    
-    NSLog(@"Entering getIDFA()");
-    FREObject fo = NULL;
-    
-    // get the id
-    if ([[ASIdentifierManager sharedManager] respondsToSelector:@selector(advertisingIdentifier)]) {
-        
-        NSLog(@"advertisingIdentifier supported");
-        NSString* idString = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-    
-        NSLog(@"id returned: %@", idString);
-        FRENewObjectFromUTF8(strlen([idString UTF8String]), (const uint8_t *)[idString UTF8String], &fo);
-    }
-    
-    NSLog(@"Exiting getIDFA()");
-    return fo;
-}
-
 #pragma mark - ANE setup
 
 /* AirDeviceIdExtInitializer()
@@ -281,7 +262,7 @@ void AirDeviceIdContextInitializer(void* extData, const uint8_t* ctxType, FRECon
     /* The following code describes the functions that are exposed by this native extension to the ActionScript code.
      * As a sample, the function isSupported is being provided.
      */
-    *numFunctionsToTest = 4;
+    *numFunctionsToTest = 3;
 
     FRENamedFunction* func = (FRENamedFunction*) malloc(sizeof(FRENamedFunction) * (*numFunctionsToTest));
     func[0].name = (const uint8_t*) "isSupported";
@@ -304,10 +285,6 @@ void AirDeviceIdContextInitializer(void* extData, const uint8_t* ctxType, FRECon
     func[2].functionData = NULL;
     func[2].function = &getIDFV;
     
-    func[3].name = (const uint8_t*) "getIDFA";
-    func[3].functionData = NULL;
-    func[3].function = &getIDFA;
-
     *functionsToSet = func;
 
     AirDeviceIdCtx = ctx;

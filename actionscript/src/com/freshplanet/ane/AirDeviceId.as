@@ -144,36 +144,6 @@ package com.freshplanet.ane {
 		}
 		
 		/**
-		 * @param	callback	method which accepts a param for an advertiser id </br>
-		 * 						function( idfa:String ) : void	
-		 */
-		public function getIDFA( callback:Function ) : void {
-			
-			if ( !this.isOnDevice ) {
-				
-				callback( null );
-				return;
-			}
-
-			if ( _idfa ) {
-				callback( _idfa == '00000000-0000-0000-0000-000000000000' ? null : _idfa );
-			}
-			else if ( isOnIOS ) {
-				
-				_idfa = _extCtx.call( 'getIDFA' ) as String;
-				callback( _idfa == '00000000-0000-0000-0000-000000000000' ? null : _idfa );
-			}
-			else {
-				
-				if ( _idfaCallbacks.length == 0 ) {
-					_extCtx.call( 'getIDFA' );
-				}
-				
-				_idfaCallbacks.push( callback );
-			}
-		}
-		
-		/**
 		 * Status events allow the native part of the ANE to communicate with the ActionScript part.
 		 * We use event.code to represent the type of event, and event.level to carry the data.
 		 */
